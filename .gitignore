@@ -1,7 +1,8 @@
 /node_modules
 /build
 /coverage
-.env
+.idea
+*.env
 *.log
 
-spins_service_log*.json
+codetheoyeucau_service_log*.json

@@ -5,7 +5,8 @@ export class LogError implements Error {
   public message: string;
   public fields?: object;
   public stack?: string;
-  constructor(error: string | Error, name: LogErrorType = 'INTERNAL', fields?: object, stack?: string) {
+  public reason?: any;
+  constructor(error: string | Error, name: LogErrorType = 'INTERNAL', fields?: object, stack?: string, reason?: any) {
     let errorStr = '';
     if (typeof error === typeof Error) {
       errorStr = (error as Error).message;
@@ -17,5 +18,6 @@ export class LogError implements Error {
     this.message = errorStr;
     this.fields = fields;
     this.stack = stack;
+    this.reason = reason;
   }
 }

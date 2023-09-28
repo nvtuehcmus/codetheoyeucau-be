@@ -23,6 +23,7 @@ import { requestOTPHandler } from 'rest/controler/Auth/requestOTPHandler';
 
 const app = express();
 
+app.set('trust proxy', 'loopback');
 app.all('*', cors);
 app.all('*', apiLimiter);
 app.use(bodyParser.json({ limit: '512kb' }));

@@ -1,4 +1,6 @@
 import winston, { LoggerOptions } from 'winston';
+import SlackHook from 'winston-slack-webhook-transport';
+import { getSlackMessage } from 'shared/helpers';
 
 const getCurrentLogFile = (): string => {
   const date = new Date();
@@ -32,6 +34,11 @@ const config: {
       new winston.transports.File({
         filename: getCurrentLogFile(),
         level: 'warn',
+      }),
+      new SlackHook({
+        webhookUrl: process.env.SLACK_WEBHOOK ?? '',
+        level: 'error',
+        formatter: (error) => getSlackMessage(error),
       }),
     ],
   },

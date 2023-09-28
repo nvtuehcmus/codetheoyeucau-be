@@ -32,6 +32,6 @@ export const lSendOTP = async (phoneNumber: string, otp: string) => {
       },
     });
   } catch (e) {
-    throw new LogError(ErrorVars.E019_FPT_SEND_OTP_ERROR, 'INTEGRATION');
+    throw new LogError(ErrorVars.E019_FPT_SEND_OTP_ERROR, 'INTEGRATION', undefined, undefined, (e as Error)?.message);
   }
 };

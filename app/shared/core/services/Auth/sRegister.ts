@@ -14,10 +14,12 @@ export const sRegister = async (username: string, password: string): Promise<voi
 
   const user = await rGetUserByUsername(_username);
 
-  if (user) {
+  if (user && user.active) {
     throw new LogError(ErrorVars.E004_USER_EXISTS, 'LOGIC');
   }
 
   await sSendToken(_username, 'VERIFY');
-  await rInsertUser(_username, password);
+  if (!user) {
+    await rInsertUser(_username, password);
+  }
 };

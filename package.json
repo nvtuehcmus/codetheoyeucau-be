@@ -39,6 +39,7 @@
     "typescript-eslint": "^0.0.1-alpha.0"
   },
   "dependencies": {
+    "@slack/web-api": "^6.9.0",
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
@@ -57,7 +58,8 @@
     "sinon": "^15.2.0",
     "twilio": "^4.9.0",
     "uuid": "^9.0.0",
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "winston-slack-webhook-transport": "^2.3.2"
   },
   "_moduleAliases": {
     "@app": "/build/app/",

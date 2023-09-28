@@ -40,7 +40,7 @@ export const responseError = (e: Error | any, req: express.Request, res: express
     body.access_token = '[HIDDEN]';
   }
 
-  if (status === 500) {
+  if (status === 500 || status === 503) {
     res.locals.ctx.logger
       .child({
         error: e,

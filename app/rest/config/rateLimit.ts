@@ -1,5 +1,5 @@
 import rateLimit from 'express-rate-limit';
-import { BASELINE_API_RATE_LIMIT } from '../../shared/const';
+import { BASELINE_API_RATE_LIMIT } from 'shared/const';
 
 export const apiLimiter = rateLimit({
   max: BASELINE_API_RATE_LIMIT,

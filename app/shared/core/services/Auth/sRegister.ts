@@ -14,6 +14,10 @@ export const sRegister = async (username: string, password: string): Promise<voi
 
   const user = await rGetUserByUsername(_username);
 
+  if (user && user.deletedAt) {
+    throw new LogError(ErrorVars.E013_USER_IS_DELETED, 'LOGIC');
+  }
+
   if (user && user.active) {
     throw new LogError(ErrorVars.E004_USER_EXISTS, 'LOGIC');
   }

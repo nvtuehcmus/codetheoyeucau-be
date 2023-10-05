@@ -1,6 +1,7 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import bodyParser from 'body-parser';
+import multer from 'multer';
 
 import { cors } from 'rest/config/cors';
 import { apiLimiter } from 'rest/config/rateLimit';
@@ -22,11 +23,14 @@ import { putEditProfileHandler } from 'rest/controler/User/putEditProfileHandler
 import { requestOTPHandler } from 'rest/controler/Auth/requestOTPHandler';
 
 const app = express();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+upload.fields([{ name: 'avatarImg', maxCount: 1 }]);
 
 app.set('trust proxy', 'loopback');
 app.all('*', cors);
 app.all('*', apiLimiter);
-app.use(bodyParser.json({ limit: '512kb' }));
+app.use(bodyParser.json({ limit: '3mb' }));
 
 app.get('/v1/health', (req: express.Request, res: express.Response) => {
   res.send({ smg: 'live' });
@@ -44,7 +48,7 @@ app.post('/v1/verify-forgot', context, asyncHandler(catchHandler(verifyForgotPas
 app.post('/v1/set-password', context, asyncHandler(catchHandler(setPasswordHandler)));
 
 app.delete('/v1/delete-user', context, auth, asyncHandler(catchHandler(deleteUserHandler)));
-// app.get('/v1/profile', context, auth, asyncHandler(catchHandler(getProfileHandler)));
-// app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
+app.get('/v1/profile', context, auth, asyncHandler(catchHandler(getProfileHandler)));
+// app.put('/v1/profile', <any>upload.single('avatarImg'), context, asyncHandler(catchHandler(putEditProfileHandler)));
 
 export default app;

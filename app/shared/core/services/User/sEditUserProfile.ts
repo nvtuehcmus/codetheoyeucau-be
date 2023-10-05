@@ -11,7 +11,7 @@ export const sEditUserProfile = async (
   first_name: string,
   address: string,
   email: string,
-  avatar_url: string,
+  avatarImg: Buffer,
   dob: string
 ): Promise<void> => {
   let _username = username;
@@ -25,6 +25,15 @@ export const sEditUserProfile = async (
   if (!user) {
     throw new LogError(ErrorVars.E002_USER_NOT_EXISTS, 'LOGIC');
   }
+  if (!user.active) {
+    throw new LogError(ErrorVars.E005_USER_PENDING, 'LOGIC');
+  }
+  if (user.deletedAt) {
+    throw new LogError(ErrorVars.E013_USER_IS_DELETED, 'LOGIC');
+  }
+  if (user.isBlocked) {
+    throw new LogError(ErrorVars.E012_USER_IS_BLOCKED, 'LOGIC');
+  }
 
-  await rUpdateUserProfile(_username, last_name, first_name, address, email, avatar_url, dob);
+  await rUpdateUserProfile(_username, last_name, first_name, address, email, avatarImg, dob);
 };

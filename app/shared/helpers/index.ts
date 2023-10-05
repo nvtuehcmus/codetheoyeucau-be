@@ -1,3 +1,10 @@
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import process from 'process';
+import { LogError } from 'shared/core/error/logError';
+import { ErrorVars } from 'shared/core/error/errorVars';
+import { sDeleteUser } from 'shared/core/services/User/sDeleteUser';
+import { responseError, responseSuccess } from 'shared/core/context';
+
 export const generateOTP = () => {
   const OTP_LENGTH = 4;
 
@@ -63,4 +70,12 @@ export const getSlackMessage = (error: any) => {
       },
     ],
   };
+};
+
+export const getTokenPayload = (token: string, key: string) => {
+  try {
+    return jwt.verify(token, key);
+  } catch (e) {
+    throw new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHENTICATION');
+  }
 };

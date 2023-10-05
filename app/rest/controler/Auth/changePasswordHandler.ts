@@ -23,7 +23,7 @@ export const changePasswordHandler = async (
     responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
     return;
   }
-  const payload = jwt.verify(req.headers.authorization.split(' ')[1], process.env.RESET_PASSWORD_TOKEN ?? '');
+  const payload = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
 
   if (!req.body.oldPassword || !req.body.newPassword) {
     responseError(new LogError(ErrorVars.E001_MISSING_DATA, 'LOGIC'), req, res);

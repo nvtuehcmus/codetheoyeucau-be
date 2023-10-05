@@ -1,4 +1,7 @@
 import { COLLECTION, DB } from 'shared/types/db';
+import { S3Instance } from 'shared/core/libs/AWS';
+import { LogError } from 'shared/core/error/logError';
+import { ErrorVars } from 'shared/core/error/errorVars';
 
 export const rUpdateUserProfile = async (
   username: string,
@@ -6,7 +9,7 @@ export const rUpdateUserProfile = async (
   firstName: string,
   address: string,
   email: string,
-  avatarUrl: string,
+  avatarImg: Buffer,
   dob: string
 ): Promise<void> => {
   const connector = await global.db;
@@ -18,7 +21,6 @@ export const rUpdateUserProfile = async (
     first_name: firstName,
     address,
     email,
-    avatar_url: avatarUrl,
     dob,
   };
 
@@ -34,4 +36,23 @@ export const rUpdateUserProfile = async (
       $set: payload,
     }
   );
+
+  if (!avatarImg) {
+    return;
+  }
+
+  const s3Instance = new S3Instance();
+  s3Instance
+    .putImage(username, 'avatar.jpg', avatarImg)
+    .then(async (data) => {
+      await collection.updateOne(
+        { username },
+        {
+          $set: { avatar_url: data },
+        }
+      );
+    })
+    .catch((e) => {
+      throw new LogError(ErrorVars.E025_UPLOAD_DATA_FAILURE, 'INTEGRATION', {}, e);
+    });
 };

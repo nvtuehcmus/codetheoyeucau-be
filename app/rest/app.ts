@@ -49,6 +49,7 @@ app.post('/v1/set-password', context, asyncHandler(catchHandler(setPasswordHandl
 
 app.delete('/v1/delete-user', context, auth, asyncHandler(catchHandler(deleteUserHandler)));
 app.get('/v1/profile', context, auth, asyncHandler(catchHandler(getProfileHandler)));
+app.put('/v1/profile-avatar', context, auth, asyncHandler(catchHandler(getProfileHandler)));
 // app.put('/v1/profile', <any>upload.single('avatarImg'), context, asyncHandler(catchHandler(putEditProfileHandler)));
 
 export default app;

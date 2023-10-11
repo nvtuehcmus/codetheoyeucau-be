@@ -15,21 +15,21 @@ export const putEditProfileHandler = async (
     any,
     any,
     {
-      lastName?: string;
-      firstName?: string;
-      address?: string;
-      email?: string;
-      dob?: string;
+      lastName: string;
+      firstName: string;
+      gender: 'MALE' | 'FEMALE';
+      dob: string;
+      address: string;
+      email: string;
     }
   >,
   res: express.Response
 ) => {
-  // if (!req.headers.authorization) {
-  //   responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
-  //   return;
-  // }
-
-  const { lastName, firstName, address, email, dob } = req.body;
+  const { lastName, firstName, address, email, dob, gender } = req.body;
+  if (!req.headers.authorization) {
+    responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
+    return;
+  }
 
   if (lastName && lastName.length > 39) {
     responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
@@ -38,9 +38,6 @@ export const putEditProfileHandler = async (
     responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
   }
   if (address && address.length > 256) {
-    responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
-  }
-  if (req.file && req.file?.size / (1024 * 1024) > 2.1) {
     responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
   }
   if (email && email.length > 256) {
@@ -52,24 +49,21 @@ export const putEditProfileHandler = async (
   if (dob && !isValidDOB(dob)) {
     responseError(new LogError(ErrorVars.E015_DATE_IS_NOT_VALID, 'LOGIC'), req, res);
   }
+  if (gender && gender !== 'MALE' && gender !== 'FEMALE') {
+    responseError(new LogError(ErrorVars.E016_FIELD_VALUE_INVALID, 'LOGIC'), req, res);
+  }
 
-  console.log(req.file?.size && req.file?.size / (1024 * 1024));
+  const payload = getTokenPayload(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
 
-  res.send(200);
+  const user = await sEditUserProfile(
+    (payload as JwtPayload).username,
+    lastName,
+    firstName,
+    gender,
+    address,
+    email,
+    dob
+  );
 
-  return;
-
-  // const payload = getTokenPayload(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
-  //
-  // const user = await sEditUserProfile(
-  //   (payload as JwtPayload).username,
-  //   lastName,
-  //   firstName,
-  //   address,
-  //   email,
-  //   avatarImg,
-  //   dob
-  // );
-  //
-  // responseSuccess(req, res, { data: user });
+  responseSuccess(req, res, {}, true);
 };

@@ -1,7 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import bodyParser from 'body-parser';
-import multer from 'multer';
 
 import { cors } from 'rest/config/cors';
 import { apiLimiter } from 'rest/config/rateLimit';
@@ -21,11 +20,10 @@ import { deleteUserHandler } from 'rest/controler/User/deleteUserHandler';
 import { getProfileHandler } from 'rest/controler/User/getProfileHandler';
 import { putEditProfileHandler } from 'rest/controler/User/putEditProfileHandler';
 import { requestOTPHandler } from 'rest/controler/Auth/requestOTPHandler';
+import { putProfileAvatarHandler } from 'rest/controler/User/putProfileAvatarHandler';
+import { singleImage } from 'rest/middleware/fileUpload';
 
 const app = express();
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-upload.fields([{ name: 'avatarImg', maxCount: 1 }]);
 
 app.set('trust proxy', 'loopback');
 app.all('*', cors);
@@ -49,7 +47,7 @@ app.post('/v1/set-password', context, asyncHandler(catchHandler(setPasswordHandl
 
 app.delete('/v1/delete-user', context, auth, asyncHandler(catchHandler(deleteUserHandler)));
 app.get('/v1/profile', context, auth, asyncHandler(catchHandler(getProfileHandler)));
-app.put('/v1/profile-avatar', context, auth, asyncHandler(catchHandler(getProfileHandler)));
-// app.put('/v1/profile', <any>upload.single('avatarImg'), context, asyncHandler(catchHandler(putEditProfileHandler)));
+app.put('/v1/profile-avatar', context, auth, singleImage, asyncHandler(catchHandler(putProfileAvatarHandler)));
+app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
 
 export default app;

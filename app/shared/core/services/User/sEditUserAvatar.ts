@@ -1,19 +1,11 @@
 import { phoneValidation, prettierPhoneNumber } from 'shared/helpers/phoneHelper';
-import { rGetUserByUsername } from 'shared/core/repo/User/rGetUser';
+import { S3Instance } from 'shared/core/libs/AWS';
+import { rUpdateUserImage } from 'shared/core/repo/User/rUpdateUserImage';
 import { LogError } from 'shared/core/error/logError';
 import { ErrorVars } from 'shared/core/error/errorVars';
-import { rDeleteUser } from 'shared/core/repo/User/rDeleteUser';
-import { rUpdateUserProfile } from 'shared/core/repo/User/rUpdateUserProfile';
+import { rGetUserByUsername } from 'shared/core/repo/User/rGetUser';
 
-export const sEditUserProfile = async (
-  username: string,
-  last_name: string,
-  first_name: string,
-  gender: 'MALE' | 'FEMALE',
-  address: string,
-  email: string,
-  dob: string
-): Promise<void> => {
+export const sEditUserProfile = async (username: string, buffer: Buffer, extension: string) => {
   let _username = username;
 
   if (phoneValidation(username)) {
@@ -35,5 +27,12 @@ export const sEditUserProfile = async (
     throw new LogError(ErrorVars.E012_USER_IS_BLOCKED, 'LOGIC');
   }
 
-  await rUpdateUserProfile(_username, last_name, first_name, gender, address, email, dob);
+  const s3Instance = new S3Instance();
+  try {
+    const url = await s3Instance.putImage(_username, `avatar.${extension}`, buffer);
+    rUpdateUserImage(_username, url);
+    return url;
+  } catch (e: any) {
+    throw new LogError(ErrorVars.E025_UPLOAD_DATA_FAILURE, 'INTEGRATION', {}, e);
+  }
 };

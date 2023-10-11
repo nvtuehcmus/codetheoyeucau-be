@@ -6,7 +6,7 @@ export type USERS = {
   firstName: string;
   lastName: string;
   dob: string;
-  gender: string;
+  gender: 'MALE' | 'FEMALE';
   email: string;
   avatarUrl: string;
   address: string;
@@ -20,7 +20,7 @@ export type USER_PROFILE = {
   firstName: string;
   lastName: string;
   dob: string;
-  gender: string;
+  gender: 'MALE' | 'FEMALE';
   email: string;
   avatarUrl: string;
   address: string;

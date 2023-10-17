@@ -1,17 +1,16 @@
 import { getCurrentUTC } from 'shared/helpers/dateHelper';
 import { COLLECTION, DB } from 'shared/types/db';
-import bcrypt from 'bcrypt';
-
+import { REQUEST_FEE_TYPE, REQUEST_STATUS } from 'shared/types/modal';
 export const rInsertRequests = async (
   username: string,
+  requestId: string,
   title: string,
   description: string,
-  subject: string,
   address: string,
+  feeType: REQUEST_FEE_TYPE,
   fee: string,
-  feeFollowing: string,
-  isHideDescription: boolean,
-  contact: string
+  contact?: string,
+  tags?: string[]
 ) => {
   const connector = await global.db;
   const instance = connector.db(DB);
@@ -20,17 +19,20 @@ export const rInsertRequests = async (
   await collection.insertOne({
     title,
     description,
-    subject,
-    address: address ?? '',
+    fee_type: feeType,
+    address: address,
+    request_id: requestId,
     fee,
-    contact: contact ?? '',
-    fee_following: feeFollowing,
-    is_hide_description: isHideDescription,
+    contact: contact ?? null,
     created_by: username,
     created_at: getCurrentUTC(),
-    status: 'PENDING',
-    register_queue: [],
-    registered: '',
+    status: REQUEST_STATUS.PENDING,
+    request_queue: [],
+    assign_to: null,
     registered_fee: 0,
+    tags,
+    paid: null,
+    is_cancel: false,
+    deleted_at: null,
   });
 };

@@ -4,6 +4,7 @@ import { LogError } from 'shared/core/error/logError';
 import { ErrorVars } from 'shared/core/error/errorVars';
 import { sDeleteUser } from 'shared/core/services/User/sDeleteUser';
 import { responseError, responseSuccess } from 'shared/core/context';
+import { intRegex } from 'shared/helpers/regex';
 
 export const generateOTP = () => {
   const OTP_LENGTH = 4;
@@ -78,4 +79,32 @@ export const getTokenPayload = (token: string, key: string) => {
   } catch (e) {
     throw new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHENTICATION');
   }
+};
+
+export const isInteger = (str: string) => {
+  return intRegex.test(str);
+};
+
+export const validationField = (payload: any, requireFields: string[]): string[] => {
+  const fields: string[] = [];
+
+  requireFields.map((requireField) => {
+    if (payload[requireField] === null || payload[requireField] === undefined) {
+      fields.push(requireField);
+    }
+  });
+
+  return fields;
+};
+
+export const isStringArray = (arr: any) => {
+  if (!Array.isArray(arr)) {
+    return false;
+  }
+
+  return arr.every((element) => typeof element === 'string');
+};
+
+export const generateRequestId = (): string => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
 };

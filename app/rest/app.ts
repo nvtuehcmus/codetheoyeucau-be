@@ -23,6 +23,8 @@ import { requestOTPHandler } from 'rest/controler/Auth/requestOTPHandler';
 import { putProfileAvatarHandler } from 'rest/controler/User/putProfileAvatarHandler';
 import { singleImage } from 'rest/middleware/fileUpload';
 import { listTagsHandler } from 'rest/controler/Requests/listTagsHandler';
+import { listRequestHandler } from 'rest/controler/Requests/listRequestHandler';
+import { postCreateRequestHandler } from 'rest/controler/Requests/postCreateRequestHandler';
 
 const app = express();
 
@@ -52,5 +54,6 @@ app.put('/v1/profile-avatar', context, auth, singleImage, asyncHandler(catchHand
 app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
 
 app.get('/v1/tags', context, auth, asyncHandler(catchHandler(listTagsHandler)));
-
+app.get('/v1/requests', context, auth, asyncHandler(catchHandler(listRequestHandler)));
+app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler)));
 export default app;

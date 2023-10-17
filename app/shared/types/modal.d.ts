@@ -59,3 +59,38 @@ export type VERIFY = {
   otp: string;
   type: 'VERIFY' | 'FORGOT';
 };
+
+export enum REQUEST_STATUS {
+  PENDING = 'PENDING',
+  APPROVE = 'APPROVE',
+  ASSIGN = 'ASSIGN',
+  DONE = 'DONE',
+}
+export enum REQUEST_FEE_TYPE {
+  MONTH = 'MONTH',
+  WEEK = 'WEEK',
+  DAY = 'DAY',
+  HOUR = 'HOUR',
+  PROJECT = 'PROJECT',
+}
+export interface REQUEST {
+  id: string;
+  requestId: string;
+  title: string;
+  description: string;
+  address: string;
+  feeType: REQUEST_FEE_TYPE;
+  fee: string;
+  paid: string;
+  tags?: string[];
+  createdAt: string;
+  deletedAt: string;
+}
+
+export interface REQUEST_DETAIL extends REQUEST {
+  assignTo: string;
+  contact?: string;
+  status: REQUEST_STATUS;
+  isCancel?: boolean;
+  createdBy: string;
+}

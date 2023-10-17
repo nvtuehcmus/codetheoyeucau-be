@@ -22,6 +22,7 @@ import { putEditProfileHandler } from 'rest/controler/User/putEditProfileHandler
 import { requestOTPHandler } from 'rest/controler/Auth/requestOTPHandler';
 import { putProfileAvatarHandler } from 'rest/controler/User/putProfileAvatarHandler';
 import { singleImage } from 'rest/middleware/fileUpload';
+import { listTagsHandler } from 'rest/controler/Requests/listTagsHandler';
 
 const app = express();
 
@@ -49,5 +50,7 @@ app.delete('/v1/delete-user', context, auth, asyncHandler(catchHandler(deleteUse
 app.get('/v1/profile', context, auth, asyncHandler(catchHandler(getProfileHandler)));
 app.put('/v1/profile-avatar', context, auth, singleImage, asyncHandler(catchHandler(putProfileAvatarHandler)));
 app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
+
+app.get('/v1/tags', context, auth, asyncHandler(catchHandler(listTagsHandler)));
 
 export default app;

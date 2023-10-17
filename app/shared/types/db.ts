@@ -5,4 +5,5 @@ export const COLLECTION = {
   CUSTOMERS: 'customers',
   REQUESTS: 'requests',
   VERIFY: 'verify',
+  TAGS: 'tags',
 };

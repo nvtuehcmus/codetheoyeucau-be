@@ -1,5 +1,5 @@
 import express from 'express';
-import { responseError } from 'rest/helper';
+import { responseError } from 'shared/core/context';
 import { Context } from 'shared/core/context';
 
 export const catchHandler = (handler: (ctx: Context, req: express.Request, res: express.Response) => void) => {

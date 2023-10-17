@@ -34,3 +34,20 @@ export const verifyOTPHandler = async (
 
   responseSuccess(req, res, {}, true);
 };
+
+const tag = [
+  'WEB',
+  'MOBILE',
+  'TESTING',
+  'SECURITY',
+  'CLOUD',
+  'NETWORK',
+  'MENTOR',
+  'EMBEDDED',
+  'ANDROID',
+  'IOS',
+  'SEMINAR',
+  'DESIGN',
+  'DATA',
+  'OTHER',
+];

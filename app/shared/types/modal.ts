@@ -78,7 +78,8 @@ export interface REQUEST {
   requestId: string;
   title: string;
   description: string;
-  address: string;
+  address?: string;
+  requestQueue?: string[];
   feeType: REQUEST_FEE_TYPE;
   fee: string;
   paid: string;
@@ -88,9 +89,9 @@ export interface REQUEST {
 }
 
 export interface REQUEST_DETAIL extends REQUEST {
-  assignTo: string;
+  assignTo?: string;
   contact?: string;
   status: REQUEST_STATUS;
   isCancel?: boolean;
-  createdBy: string;
+  createdBy?: string;
 }

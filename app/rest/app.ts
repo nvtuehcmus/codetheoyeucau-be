@@ -25,6 +25,8 @@ import { singleImage } from 'rest/middleware/fileUpload';
 import { listTagsHandler } from 'rest/controler/Requests/listTagsHandler';
 import { listRequestHandler } from 'rest/controler/Requests/listRequestHandler';
 import { postCreateRequestHandler } from 'rest/controler/Requests/postCreateRequestHandler';
+import { getRequestHandler } from 'rest/controler/Requests/getRequestHandler';
+import { putRegisterRequestHandler } from 'rest/controler/Requests/putRegisterRequestHandler';
 
 const app = express();
 
@@ -54,6 +56,8 @@ app.put('/v1/profile-avatar', context, auth, singleImage, asyncHandler(catchHand
 app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
 
 app.get('/v1/tags', context, auth, asyncHandler(catchHandler(listTagsHandler)));
-app.get('/v1/requests', context, auth, asyncHandler(catchHandler(listRequestHandler)));
-app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler)));
+app.get('/v1/requests', context, asyncHandler(catchHandler(listRequestHandler))); // test
+app.get('/v1/request/:request_id', context, asyncHandler(catchHandler(getRequestHandler))); // test
+app.put('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(putRegisterRequestHandler))); // test
+app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler))); // test
 export default app;

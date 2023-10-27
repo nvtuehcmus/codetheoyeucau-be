@@ -1,4 +1,4 @@
-import { rGetRequests } from 'shared/core/repo/Requests/rGetRequest';
+import { rGetRequests } from 'shared/core/repo/Requests/rGetRequests';
 import { ObjectId } from 'mongodb';
 import { REQUEST } from 'shared/types/modal';
 

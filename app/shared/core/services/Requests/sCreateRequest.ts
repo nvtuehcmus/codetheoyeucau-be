@@ -1,5 +1,5 @@
 import { userValidation } from 'shared/core/services/helpers/userValidation';
-import { rGetTodayRequestsByUser } from 'shared/core/repo/Requests/rGetRequest';
+import { rGetTodayRequestsByUser } from 'shared/core/repo/Requests/rGetRequests';
 import { LogError } from 'shared/core/error/logError';
 import { ErrorVars } from 'shared/core/error/errorVars';
 import { REQUEST_FEE_TYPE } from 'shared/types/modal';
@@ -15,7 +15,7 @@ export const sCreateRequest = async (
   contact?: string,
   tags?: string[]
 ) => {
-  const user = await userValidation(username);
+  await userValidation(username);
   const todayRequests = await rGetTodayRequestsByUser(username);
   if (todayRequests.length >= 5) {
     throw new LogError(ErrorVars.E017_LIMIT_CREATE_REQUEST_FOR_TODAY, 'LOGIC');

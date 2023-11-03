@@ -42,5 +42,5 @@ export const listRequestHandler = async (
     tags
   );
 
-  responseSuccess(req, res, requests);
+  responseSuccess(req, res, { data: requests });
 };

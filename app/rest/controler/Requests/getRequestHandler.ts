@@ -15,5 +15,5 @@ export const getRequestHandler = async (
       .username;
   }
   const request = await sGetRequestDetail(username, req.params.request_id ?? '', false);
-  responseSuccess(req, res, request);
+  responseSuccess(req, res, { data: request });
 };

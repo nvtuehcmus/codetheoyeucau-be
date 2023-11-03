@@ -22,5 +22,6 @@ declare global {
     }
   }
 }
+
 global.db = db;
 global.logger = logger;

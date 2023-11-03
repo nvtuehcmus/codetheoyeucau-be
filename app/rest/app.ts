@@ -35,6 +35,8 @@ app.all('*', cors);
 app.all('*', apiLimiter);
 app.use(bodyParser.json({ limit: '3mb' }));
 
+console.log(process.platform);
+
 app.get('/v1/health', (req: express.Request, res: express.Response) => {
   res.send({ smg: 'live' });
 });
@@ -55,7 +57,7 @@ app.get('/v1/profile', context, auth, asyncHandler(catchHandler(getProfileHandle
 app.put('/v1/profile-avatar', context, auth, singleImage, asyncHandler(catchHandler(putProfileAvatarHandler)));
 app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
 
-app.get('/v1/tags', context, auth, asyncHandler(catchHandler(listTagsHandler)));
+app.get('/v1/tags', context, asyncHandler(catchHandler(listTagsHandler)));
 app.get('/v1/requests', context, asyncHandler(catchHandler(listRequestHandler))); // test
 app.get('/v1/request/:request_id', context, asyncHandler(catchHandler(getRequestHandler))); // test
 app.put('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(putRegisterRequestHandler))); // test

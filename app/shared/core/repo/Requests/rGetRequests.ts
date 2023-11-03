@@ -69,7 +69,7 @@ export const rGetRequests = async (
   if (!isAdmin) {
     query.$and.push({ status: REQUEST_STATUS.APPROVE });
     query.$and.push({ deleted_at: null });
-    query.$and.push({ $where: 'this.request_queue.length < 5' });
+    query.$and.push({ request_queue: { $exists: true, $not: { $size: 5 } } });
     query.$and.push({ is_cancel: false });
   }
 

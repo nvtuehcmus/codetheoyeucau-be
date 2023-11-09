@@ -97,3 +97,8 @@ export interface REQUEST_DETAIL extends REQUEST {
   isCancel?: boolean;
   createdBy?: string;
 }
+
+export enum CUSTOMER_CONTACT_STATUS {
+  PENDING = 'PENDING',
+  SOLVED = 'SOLVED'
+}

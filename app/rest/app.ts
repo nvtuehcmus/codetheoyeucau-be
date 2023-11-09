@@ -23,7 +23,7 @@ import { listRequestHandler } from 'rest/controler/Requests/listRequestHandler';
 import { postCreateRequestHandler } from 'rest/controler/Requests/postCreateRequestHandler';
 import { getRequestHandler } from 'rest/controler/Requests/getRequestHandler';
 import { putRegisterRequestHandler } from 'rest/controler/Requests/putRegisterRequestHandler';
-import { spawnSync } from 'node:child_process';
+import { postUserContactHandler } from 'rest/controler/User/postUserContactHandler';
 
 const app = express();
 
@@ -31,16 +31,6 @@ app.set('trust proxy', 'loopback');
 app.all('*', cors);
 app.all('*', apiLimiter);
 app.use(bodyParser.json({ limit: '3mb' }));
-
-console.log(__dirname);
-
-const myVariable = 'abc';
-
-console.log(
-  spawnSync('osascript', [`${__dirname}/nextSlide.scpt`, myVariable], {
-    encoding: 'utf-8'
-  })
-);
 
 app.get('/v1/health', (req: express.Request, res: express.Response) => {
   res.send({ smg: 'live' });
@@ -67,4 +57,6 @@ app.get('/v1/requests', context, asyncHandler(catchHandler(listRequestHandler)))
 app.get('/v1/request/:request_id', context, asyncHandler(catchHandler(getRequestHandler))); // test
 app.put('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(putRegisterRequestHandler))); // test
 app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler))); // test
+
+app.post('/v1/customer-contact', context, asyncHandler(catchHandler(postUserContactHandler)));
 export default app;

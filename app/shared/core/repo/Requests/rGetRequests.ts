@@ -38,12 +38,12 @@ export const rGetRequests = async (pageSize: number, isAdmin: boolean, id?: Obje
 
   if (tags && tags.length > 0) {
     query.$and.push({
-      $in: tags
+      tags: { $in: tags }
     });
   }
 
   if (status && status.length > 0) {
-    query.$and.push({ $in: status });
+    query.$and.push({ status: { $in: status } });
   }
 
   if (requestId) {

@@ -7,9 +7,9 @@ const sharedServices: Services = [
     name: 'sms_service',
     services: {
       post_sign_in: 'POST /oauth2/token',
-      post_sms_otp: 'POST /api/push-brandname-otp',
-    },
-  },
+      post_sms_otp: 'POST /api/push-brandname-otp'
+    }
+  }
 ];
 
 export default sharedServices;

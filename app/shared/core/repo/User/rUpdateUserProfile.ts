@@ -1,13 +1,6 @@
 import { COLLECTION, DB } from 'shared/types/db';
-export const rUpdateUserProfile = async (
-  username: string,
-  lastName: string,
-  firstName: string,
-  gender: 'MALE' | 'FEMALE',
-  address: string,
-  email: string,
-  dob: string
-): Promise<void> => {
+
+export const rUpdateUserProfile = async (username: string, lastName: string, firstName: string, gender: 'MALE' | 'FEMALE', address: string, email: string, dob: string): Promise<void> => {
   const connector = await global.db;
   const instance = connector.db(DB);
   const collection = instance.collection(COLLECTION.USERS);
@@ -18,7 +11,7 @@ export const rUpdateUserProfile = async (
     gender,
     address,
     email,
-    dob,
+    dob
   };
 
   Object.keys(payload).map((key) => {
@@ -30,7 +23,7 @@ export const rUpdateUserProfile = async (
   await collection.updateOne(
     { username },
     {
-      $set: payload,
+      $set: payload
     }
   );
 };

@@ -1,18 +1,15 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
-    ],
-    "jsRules": {},
-    "rules": {
-        "object-literal-sort-keys": false,
-        "no-tautology-expression": true,
-        "no-unused-expression": false,
-        "no-unused-variable": true,
-        "no-var-requires":false,
-        "class-name": false,
-        "variable-name": false
-    },
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "jsRules": {},
+  "rules": {
+    "object-literal-sort-keys": false,
+    "no-tautology-expression": true,
+    "no-unused-expression": false,
+    "no-unused-variable": true,
+    "no-var-requires": false,
+    "class-name": false,
+    "variable-name": false
+  },
+  "rulesDirectory": []
 }

@@ -10,11 +10,7 @@ import { catchHandler } from 'rest/middleware/catchControler';
 import { registerHandler } from 'rest/controler/Auth/registerHandler';
 import { changePasswordHandler } from 'rest/controler/Auth/changePasswordHandler';
 import { verifyOTPHandler } from 'rest/controler/Auth/verifyOTPHandler';
-import {
-  requestForgotPasswordHandler,
-  setPasswordHandler,
-  verifyForgotPasswordToken,
-} from 'rest/controler/Auth/forgotPasswordHandler';
+import { requestForgotPasswordHandler, setPasswordHandler, verifyForgotPasswordToken } from 'rest/controler/Auth/forgotPasswordHandler';
 import { auth } from 'rest/middleware/auth';
 import { deleteUserHandler } from 'rest/controler/User/deleteUserHandler';
 import { getProfileHandler } from 'rest/controler/User/getProfileHandler';
@@ -27,6 +23,7 @@ import { listRequestHandler } from 'rest/controler/Requests/listRequestHandler';
 import { postCreateRequestHandler } from 'rest/controler/Requests/postCreateRequestHandler';
 import { getRequestHandler } from 'rest/controler/Requests/getRequestHandler';
 import { putRegisterRequestHandler } from 'rest/controler/Requests/putRegisterRequestHandler';
+import { spawnSync } from 'node:child_process';
 
 const app = express();
 
@@ -35,7 +32,15 @@ app.all('*', cors);
 app.all('*', apiLimiter);
 app.use(bodyParser.json({ limit: '3mb' }));
 
-console.log(process.platform);
+console.log(__dirname);
+
+const myVariable = 'abc';
+
+console.log(
+  spawnSync('osascript', [`${__dirname}/nextSlide.scpt`, myVariable], {
+    encoding: 'utf-8'
+  })
+);
 
 app.get('/v1/health', (req: express.Request, res: express.Response) => {
   res.send({ smg: 'live' });

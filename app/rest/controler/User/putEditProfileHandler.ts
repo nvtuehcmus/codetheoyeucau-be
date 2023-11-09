@@ -55,15 +55,7 @@ export const putEditProfileHandler = async (
 
   const payload = getTokenPayload(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
 
-  const user = await sEditUserProfile(
-    (payload as JwtPayload).username,
-    lastName,
-    firstName,
-    gender,
-    address,
-    email,
-    dob
-  );
+  const user = await sEditUserProfile((payload as JwtPayload).username, lastName, firstName, gender, address, email, dob);
 
   responseSuccess(req, res, {}, true);
 };

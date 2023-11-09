@@ -16,5 +16,5 @@
       "rest/*": ["app/rest/*"]
     }
   },
-  "exclude": ["app/rest/test/*","coverage"]
+  "exclude": ["app/rest/test/*", "coverage"]
 }

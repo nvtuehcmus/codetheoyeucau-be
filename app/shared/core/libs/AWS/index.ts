@@ -1,19 +1,22 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { fromIni } from '@aws-sdk/credential-providers';
+
 export class S3Instance {
   private instance: S3Client;
+
   constructor() {
     const credentials = fromIni({ profile: 'default' });
     this.instance = new S3Client({
-      credentials,
+      credentials
     });
   }
+
   public putImage(username: string, filename: string, image: Buffer): Promise<string> {
     return new Promise(async (resolve, reject) => {
       const params = {
         Bucket: process.env.AVATAR_S3_BUTKET ?? '',
         Key: `${username}/${filename}`,
-        Body: image,
+        Body: image
       };
       const command = new PutObjectCommand(params);
 

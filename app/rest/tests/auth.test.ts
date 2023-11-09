@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'test') {
   throw new Error('env must be test');
 }
 dotenv.config({
-  path: `.test.env`,
+  path: `.test.env`
 });
 
 const URL = `http://localhost:${process.env.PORT}/v1`;

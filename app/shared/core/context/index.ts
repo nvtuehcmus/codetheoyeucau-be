@@ -15,9 +15,9 @@ export const responseError = (e: Error | any, req: express.Request, res: express
         status = 422;
         res.status(422).json({
           errors: {
-            fields: (e as LogError).fields ? [(e as LogError).fields] : [],
+            fields: (e as LogError).fields ? [(e as LogError).fields] : []
           },
-          code: (e as LogError).message,
+          code: (e as LogError).message
         });
         break;
       case 'INTEGRATION':
@@ -54,7 +54,7 @@ export const responseError = (e: Error | any, req: express.Request, res: express
         stack: e.stack,
         status,
         body,
-        query: req.query,
+        query: req.query
       })
       .error(`Controller error catch: ${e.message}`);
   } else {
@@ -64,7 +64,7 @@ export const responseError = (e: Error | any, req: express.Request, res: express
         stack: e.stack,
         status,
         body,
-        query: req.query,
+        query: req.query
       })
       .warn(`Controller error catch: ${e.message}`);
   }
@@ -78,7 +78,7 @@ export const responseSuccess = (req: express.Request, res: express.Response, dat
       url: requestUrl,
       body: requestUrl.indexOf('/login') < 0 ? req.body : null,
       status: isCreated ? 201 : 200,
-      level: 'info',
+      level: 'info'
     })
     .info('SuccessExit');
 

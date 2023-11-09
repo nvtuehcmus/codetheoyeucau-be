@@ -1,17 +1,8 @@
 import { getCurrentUTC } from 'shared/helpers/dateHelper';
 import { COLLECTION, DB } from 'shared/types/db';
 import { REQUEST_FEE_TYPE, REQUEST_STATUS } from 'shared/types/modal';
-export const rInsertRequests = async (
-  username: string,
-  requestId: string,
-  title: string,
-  description: string,
-  address: string,
-  feeType: REQUEST_FEE_TYPE,
-  fee: string,
-  contact?: string,
-  tags?: string[]
-) => {
+
+export const rInsertRequests = async (username: string, requestId: string, title: string, description: string, address: string, feeType: REQUEST_FEE_TYPE, fee: string, contact?: string, tags?: string[]) => {
   const connector = await global.db;
   const instance = connector.db(DB);
   const collection = instance.collection(COLLECTION.REQUESTS);
@@ -33,6 +24,6 @@ export const rInsertRequests = async (
     tags,
     paid: null,
     is_cancel: false,
-    deleted_at: null,
+    deleted_at: null
   });
 };

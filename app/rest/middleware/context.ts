@@ -12,8 +12,8 @@ export const context = async (req: express.Request, res: express.Response, next:
     logger: global.logger.child({
       request_id: requestId,
       agent: req.headers['user-agent'],
-      url: `${req.method} ${req.hostname + req.url}`,
-    }),
+      url: `${req.method} ${req.hostname + req.url}`
+    })
   };
 
   next();

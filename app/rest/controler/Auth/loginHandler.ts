@@ -11,11 +11,7 @@ type LoginPayload = {
   username: string;
   password: string;
 };
-export const loginHandler = async (
-  ctx: Context,
-  req: express.Request<any, any, LoginPayload>,
-  res: express.Response
-) => {
+export const loginHandler = async (ctx: Context, req: express.Request<any, any, LoginPayload>, res: express.Response) => {
   if (!req.body.username || (req.body.username && !phoneValidation(req.body.username))) {
     responseError(new LogError(ErrorVars.E001_MISSING_DATA, 'LOGIC'), req, res);
     return;

@@ -3,11 +3,7 @@ export const getCurrentUTC = () => new Date(new Date().toLocaleString('en-US', {
 export const isToday = (dateToCheck: Date) => {
   const currentDate = new Date();
 
-  return (
-    dateToCheck.getFullYear() === currentDate.getFullYear() &&
-    dateToCheck.getMonth() === currentDate.getMonth() &&
-    dateToCheck.getDate() === currentDate.getDate()
-  );
+  return dateToCheck.getFullYear() === currentDate.getFullYear() && dateToCheck.getMonth() === currentDate.getMonth() && dateToCheck.getDate() === currentDate.getDate();
 };
 
 export const isDistanceGatherThan = (dateToCheck: Date, distance: number) => {

@@ -5,15 +5,7 @@ import { ErrorVars } from 'shared/core/error/errorVars';
 import { rDeleteUser } from 'shared/core/repo/User/rDeleteUser';
 import { rUpdateUserProfile } from 'shared/core/repo/User/rUpdateUserProfile';
 
-export const sEditUserProfile = async (
-  username: string,
-  last_name: string,
-  first_name: string,
-  gender: 'MALE' | 'FEMALE',
-  address: string,
-  email: string,
-  dob: string
-): Promise<void> => {
+export const sEditUserProfile = async (username: string, last_name: string, first_name: string, gender: 'MALE' | 'FEMALE', address: string, email: string, dob: string): Promise<void> => {
   let _username = username;
 
   if (phoneValidation(username)) {

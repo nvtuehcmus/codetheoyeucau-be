@@ -14,8 +14,8 @@ export const lSendOTP = async (phoneNumber: string, otp: string) => {
         client_secret: process.env.FPT_SECRET_ID,
         scope: 'send_brandname_otp send_brandname',
         session_id: sessionId,
-        grant_type: 'client_credentials',
-      },
+        grant_type: 'client_credentials'
+      }
     })) as any;
 
     const accessToken = requestAccess.access_token;
@@ -28,8 +28,8 @@ export const lSendOTP = async (phoneNumber: string, otp: string) => {
         BrandName: BRAND_NAME,
         Phone: phoneNumber,
         Message: utf8ToBase64(OTP_TEMPLATE(otp)),
-        RequestId: sessionId,
-      },
+        RequestId: sessionId
+      }
     });
   } catch (e) {
     throw new LogError(ErrorVars.E019_FPT_SEND_OTP_ERROR, 'INTEGRATION', undefined, undefined, (e as Error)?.message);

@@ -19,6 +19,6 @@ export const rGetVerifyRequest = async (username: string): Promise<VERIFY | null
     username: verifyRequest.username,
     updatedAt: verifyRequest.updated_at,
     otp: verifyRequest.otp,
-    type: verifyRequest.type,
+    type: verifyRequest.type
   };
 };

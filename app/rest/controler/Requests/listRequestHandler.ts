@@ -6,11 +6,7 @@ import { ErrorVars } from 'shared/core/error/errorVars';
 import { isInteger } from 'shared/helpers';
 import { sListRequest } from 'shared/core/services/Requests/sListRequest';
 
-export const listRequestHandler = async (
-  ctx: Context,
-  req: express.Request<any, any, any, { id?: string; pageSize?: string; tags?: string }>,
-  res: express.Response
-) => {
+export const listRequestHandler = async (ctx: Context, req: express.Request<any, any, any, { id?: string; pageSize?: string; tags?: string }>, res: express.Response) => {
   if (req.query.id) {
     toObjectId(req.query.id);
   }
@@ -36,11 +32,7 @@ export const listRequestHandler = async (
       return;
     }
   }
-  const requests = await sListRequest(
-    Number(req.query.pageSize),
-    req.query.id ? toObjectId(req.query.id) : undefined,
-    tags
-  );
+  const requests = await sListRequest(Number(req.query.pageSize), req.query.id ? toObjectId(req.query.id) : undefined, tags);
 
   responseSuccess(req, res, { data: requests });
 };

@@ -14,6 +14,6 @@ export const rInsertUser = async (username: string, password: string): Promise<v
     active: false,
     created_at: getCurrentUTC(),
     deleted_at: null,
-    is_blocked: false,
+    is_blocked: false
   });
 };

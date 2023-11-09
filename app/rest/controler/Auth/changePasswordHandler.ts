@@ -12,11 +12,7 @@ type ChangePasswordType = {
   oldPassword: string;
   newPassword: string;
 };
-export const changePasswordHandler = async (
-  ctx: Context,
-  req: express.Request<any, any, ChangePasswordType>,
-  res: express.Response
-) => {
+export const changePasswordHandler = async (ctx: Context, req: express.Request<any, any, ChangePasswordType>, res: express.Response) => {
   if (!req.headers.authorization) {
     responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
     return;

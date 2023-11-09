@@ -64,15 +64,17 @@ export enum REQUEST_STATUS {
   PENDING = 'PENDING',
   APPROVE = 'APPROVE',
   ASSIGN = 'ASSIGN',
-  DONE = 'DONE',
+  DONE = 'DONE'
 }
+
 export enum REQUEST_FEE_TYPE {
   MONTH = 'MONTH',
   WEEK = 'WEEK',
   DAY = 'DAY',
   HOUR = 'HOUR',
-  PROJECT = 'PROJECT',
+  PROJECT = 'PROJECT'
 }
+
 export interface REQUEST {
   id: string;
   requestId: string;

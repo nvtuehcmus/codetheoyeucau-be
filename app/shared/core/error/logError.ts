@@ -6,6 +6,7 @@ export class LogError implements Error {
   public fields?: object;
   public stack?: string;
   public reason?: any;
+
   constructor(error: string | Error, name: LogErrorType = 'INTERNAL', fields?: object, stack?: string, reason?: any) {
     let errorStr = '';
     if (typeof error === typeof Error) {

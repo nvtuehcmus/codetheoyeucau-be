@@ -1,6 +1,7 @@
 import { COLLECTION, DB } from 'shared/types/db';
 import { ObjectId } from 'mongodb';
 import { REQUEST_DETAIL, REQUEST_STATUS } from 'shared/types/modal';
+
 export const rGetTodayRequestsByUser = async (username: string) => {
   const connector = await global.db;
   const instance = connector.db(DB);
@@ -14,22 +15,13 @@ export const rGetTodayRequestsByUser = async (username: string) => {
       username,
       created_at: {
         $gte: now,
-        $lt: twentyFourHoursFromNow,
-      },
+        $lt: twentyFourHoursFromNow
+      }
     })
     .toArray();
 };
 
-export const rGetRequests = async (
-  pageSize: number,
-  isAdmin: boolean,
-  id?: ObjectId,
-  tags?: string[],
-  status?: string[] | undefined,
-  requestId?: string,
-  isDelete?: boolean,
-  createdBy?: string
-): Promise<REQUEST_DETAIL[]> => {
+export const rGetRequests = async (pageSize: number, isAdmin: boolean, id?: ObjectId, tags?: string[], status?: string[] | undefined, requestId?: string, isDelete?: boolean, createdBy?: string): Promise<REQUEST_DETAIL[]> => {
   const connector = await global.db;
   const instance = connector.db(DB);
   const collection = instance.collection(COLLECTION.REQUESTS);
@@ -39,14 +31,14 @@ export const rGetRequests = async (
   if (id) {
     query.$and.push({
       _id: {
-        $gt: id,
-      },
+        $gt: id
+      }
     });
   }
 
   if (tags && tags.length > 0) {
     query.$and.push({
-      $in: tags,
+      $in: tags
     });
   }
 
@@ -69,7 +61,9 @@ export const rGetRequests = async (
   if (!isAdmin) {
     query.$and.push({ status: REQUEST_STATUS.APPROVE });
     query.$and.push({ deleted_at: null });
-    query.$and.push({ request_queue: { $exists: true, $not: { $size: 5 } } });
+    query.$and.push({
+      request_queue: { $exists: true, $not: { $size: 5 } }
+    });
     query.$and.push({ is_cancel: false });
   }
 
@@ -92,6 +86,6 @@ export const rGetRequests = async (
     createdAt: request.created_at,
     requestQueue: request.request_queue,
     isCancel: request.is_cancel,
-    createdBy: request.created_by,
+    createdBy: request.created_by
   }));
 };

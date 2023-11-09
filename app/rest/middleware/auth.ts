@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { responseError } from 'shared/core/context';
 import { LogError } from 'shared/core/error/logError';
 import { ErrorVars } from 'shared/core/error/errorVars';
+
 export const auth = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     if (!req.headers.authorization) {

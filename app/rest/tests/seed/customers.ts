@@ -14,7 +14,7 @@ export const customersSeeding = async (db: Db) => {
       limit: 3,
       age: 20,
       email: 'test_1@example.com',
-      item: null,
+      item: null
     },
     {
       phone_number: '84344465655',
@@ -22,7 +22,7 @@ export const customersSeeding = async (db: Db) => {
       limit: 0,
       age: 18,
       email: 'test_2@example.com',
-      item: 2,
-    },
+      item: 2
+    }
   ]);
 };

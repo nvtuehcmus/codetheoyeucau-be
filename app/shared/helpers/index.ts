@@ -59,17 +59,17 @@ export const getSlackMessage = (error: any) => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: 'Hey Tue 👋. There is very important notice, codetheoyeucau.com has extremely serious error.',
-        },
+          text: 'Hey Tue 👋. There is very important notice, codetheoyeucau.com has extremely serious error.'
+        }
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `\`\`\` ${jsonToMarkdown(error)}\`\`\``,
-        },
-      },
-    ],
+          text: `\`\`\` ${jsonToMarkdown(error)}\`\`\``
+        }
+      }
+    ]
   };
 };
 

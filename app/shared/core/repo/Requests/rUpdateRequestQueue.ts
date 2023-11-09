@@ -8,7 +8,7 @@ export const rUpdateRequestQueue = async (requestId: string, username: string, r
   await collection.updateOne(
     { request_id: username },
     {
-      $set: { request_queue: requestQueue },
+      $set: { request_queue: requestQueue }
     }
   );
 };

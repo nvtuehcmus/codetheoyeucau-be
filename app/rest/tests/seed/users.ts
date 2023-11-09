@@ -8,23 +8,23 @@ export const usersSeeding = async (db: Db) => {
     {
       username: '84344465655',
       password: '$2b$10$/XQl75Ef2QzgG.IjxWCCYudUeZ8xXSuZ.FO001RNvRPscHH97qtEW', // admin@123
-      active: true,
+      active: true
     },
 
     {
       username: '84344465656',
       password: '$2b$10$/XQl75Ef2QzgG.IjxWCCYudUeZ8xXSuZ.FO001RNvRPscHH97qtEW', // admin@123
-      active: false,
+      active: false
     },
     {
       username: '84344465657',
       password: '$2b$10$/XQl75Ef2QzgG.IjxWCCYudUeZ8xXSuZ.FO001RNvRPscHH97qtEW', // admin@123
-      active: true,
+      active: true
     },
     {
       username: '84344465658',
       password: '$2b$10$/XQl75Ef2QzgG.IjxWCCYudUeZ8xXSuZ.FO001RNvRPscHH97qtEW', // admin@123
-      active: false,
-    },
+      active: false
+    }
   ]);
 };

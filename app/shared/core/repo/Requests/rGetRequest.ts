@@ -28,6 +28,6 @@ export const rGetRequest = async (requestId: string): Promise<REQUEST_DETAIL | n
     description: request.description,
     deletedAt: request.deleted_at,
     isCancel: request.is_cancel,
-    requestQueue: request.request_queue,
+    requestQueue: request.request_queue
   };
 };

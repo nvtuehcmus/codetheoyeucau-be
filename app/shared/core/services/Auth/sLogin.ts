@@ -31,7 +31,7 @@ export const sLogin = async (username: string, password: string): Promise<string
       gender: user.gender,
       email: user.email,
       address: user.address,
-      avatarUrl: user.avatarUrl,
+      avatarUrl: user.avatarUrl
     },
     process.env.SECRET_TOKEN ?? ' '
   );

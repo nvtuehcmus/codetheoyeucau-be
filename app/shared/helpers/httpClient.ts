@@ -24,12 +24,7 @@ const injectServices = (
 };
 
 injectServices(sharedServices);
-const getServiceInfo = (args: {
-  params?: object;
-  query?: object;
-  serviceName: keyof (typeof services)[number]['services'];
-  body?: string;
-}): ServiceInfo => {
+const getServiceInfo = (args: { params?: object; query?: object; serviceName: keyof (typeof services)[number]['services']; body?: string }): ServiceInfo => {
   for (const service of services) {
     if (service.services.hasOwnProperty(args.serviceName)) {
       const [method, uri] = service.services[args.serviceName].split(' ');
@@ -47,7 +42,7 @@ const getServiceInfo = (args: {
 
       return {
         method: method.toUpperCase(),
-        url,
+        url
       };
     }
   }
@@ -71,9 +66,9 @@ const doHttp = (args: {
         method: serviceInfo.method,
         url: serviceInfo.url,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        data: args.body,
+        data: args.body
       })
       .then((response: AxiosResponse<any>) => {
         resolve(response.data);

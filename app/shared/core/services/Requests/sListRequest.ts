@@ -16,6 +16,6 @@ export const sListRequest = async (pageSize: number, id?: ObjectId, tags?: strin
     createdAt: request.createdAt,
     paid: request.paid,
     title: request.title,
-    description: request.description,
+    description: request.description
   }));
 };

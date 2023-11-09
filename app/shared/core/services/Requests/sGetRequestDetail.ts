@@ -3,11 +3,7 @@ import { LogError } from 'shared/core/error/logError';
 import { ErrorVars } from 'shared/core/error/errorVars';
 import { REQUEST_DETAIL } from 'shared/types/modal';
 
-export const sGetRequestDetail = async (
-  username: string,
-  requestId: string,
-  isAdmin: boolean
-): Promise<REQUEST_DETAIL> => {
+export const sGetRequestDetail = async (username: string, requestId: string, isAdmin: boolean): Promise<REQUEST_DETAIL> => {
   const request = await rGetRequest(requestId);
 
   if (!request) {

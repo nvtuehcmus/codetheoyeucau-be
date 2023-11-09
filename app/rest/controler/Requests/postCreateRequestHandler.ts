@@ -8,6 +8,7 @@ import { decimalFee } from 'shared/helpers/regex';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import process from 'process';
 import { sCreateRequest } from 'shared/core/services/Requests/sCreateRequest';
+
 type CREATE_REQUEST_PAYLOAD = {
   title: string;
   description: string;
@@ -17,11 +18,7 @@ type CREATE_REQUEST_PAYLOAD = {
   fee: string;
   tags?: string[];
 };
-export const postCreateRequestHandler = async (
-  ctx: Context,
-  req: express.Request<any, any, CREATE_REQUEST_PAYLOAD>,
-  res: express.Response
-) => {
+export const postCreateRequestHandler = async (ctx: Context, req: express.Request<any, any, CREATE_REQUEST_PAYLOAD>, res: express.Response) => {
   if (!req.headers.authorization) {
     responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
     return;
@@ -76,16 +73,7 @@ export const postCreateRequestHandler = async (
     responseError(new LogError(ErrorVars.E016_FIELD_VALUE_INVALID, 'LOGIC', ['tags']), req, res);
   }
 
-  await sCreateRequest(
-    (payload as JwtPayload).username,
-    req.body.title,
-    req.body.description,
-    req.body.address,
-    req.body.feeType,
-    req.body.fee,
-    req.body.contact,
-    req.body.tags
-  );
+  await sCreateRequest((payload as JwtPayload).username, req.body.title, req.body.description, req.body.address, req.body.feeType, req.body.fee, req.body.contact, req.body.tags);
 
   responseSuccess(req, res, {}, true);
 };

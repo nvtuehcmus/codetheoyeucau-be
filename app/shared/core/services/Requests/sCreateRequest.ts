@@ -5,16 +5,8 @@ import { ErrorVars } from 'shared/core/error/errorVars';
 import { REQUEST_FEE_TYPE } from 'shared/types/modal';
 import { generateRequestId } from 'shared/helpers';
 import { rInsertRequests } from 'shared/core/repo/Requests/rInsertRequests';
-export const sCreateRequest = async (
-  username: string,
-  title: string,
-  description: string,
-  address: string,
-  feeType: REQUEST_FEE_TYPE,
-  fee: string,
-  contact?: string,
-  tags?: string[]
-) => {
+
+export const sCreateRequest = async (username: string, title: string, description: string, address: string, feeType: REQUEST_FEE_TYPE, fee: string, contact?: string, tags?: string[]) => {
   await userValidation(username);
   const todayRequests = await rGetTodayRequestsByUser(username);
   if (todayRequests.length >= 5) {

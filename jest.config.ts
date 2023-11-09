@@ -3,5 +3,5 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['app/rest/tests'],
   modulePaths: ['app'],
-  setupFilesAfterEnv: ['./app/rest/tests/bootstrap.ts'],
+  setupFilesAfterEnv: ['./app/rest/tests/bootstrap.ts']
 };

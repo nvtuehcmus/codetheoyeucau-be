@@ -19,7 +19,7 @@ export const sVerifyForgotPasswordToken = async (username: string, otp: string):
   return jwt.sign(
     {
       id: user.id,
-      username: user.username,
+      username: user.username
     },
     process.env.RESET_PASSWORD_TOKEN ?? '',
     { expiresIn: '5m' }

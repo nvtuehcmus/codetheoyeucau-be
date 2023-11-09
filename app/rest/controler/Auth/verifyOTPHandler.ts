@@ -11,15 +11,8 @@ type VerifyPayload = {
   username: string;
   otp: string;
 };
-export const verifyOTPHandler = async (
-  ctx: Context,
-  req: express.Request<any, any, VerifyPayload>,
-  res: express.Response
-) => {
-  if (
-    !req.body.username ||
-    (req.body.username && !(phoneValidation(req.body.username) || emailValidation(req.body.username)))
-  ) {
+export const verifyOTPHandler = async (ctx: Context, req: express.Request<any, any, VerifyPayload>, res: express.Response) => {
+  if (!req.body.username || (req.body.username && !(phoneValidation(req.body.username) || emailValidation(req.body.username)))) {
     responseError(new LogError(ErrorVars.E001_MISSING_DATA, 'LOGIC'), req, res);
     return;
   }
@@ -35,19 +28,4 @@ export const verifyOTPHandler = async (
   responseSuccess(req, res, {}, true);
 };
 
-const tag = [
-  'WEB',
-  'MOBILE',
-  'TESTING',
-  'SECURITY',
-  'CLOUD',
-  'NETWORK',
-  'MENTOR',
-  'EMBEDDED',
-  'ANDROID',
-  'IOS',
-  'SEMINAR',
-  'DESIGN',
-  'DATA',
-  'OTHER',
-];
+const tag = ['WEB', 'MOBILE', 'TESTING', 'SECURITY', 'CLOUD', 'NETWORK', 'MENTOR', 'EMBEDDED', 'ANDROID', 'IOS', 'SEMINAR', 'DESIGN', 'DATA', 'OTHER'];

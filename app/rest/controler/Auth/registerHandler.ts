@@ -12,15 +12,8 @@ type RegisterPayload = {
   username: string;
   password: string;
 };
-export const registerHandler = async (
-  ctx: Context,
-  req: express.Request<any, any, RegisterPayload>,
-  res: express.Response
-) => {
-  if (
-    !req.body.username ||
-    (req.body.username && !(phoneValidation(req.body.username) || emailValidation(req.body.username)))
-  ) {
+export const registerHandler = async (ctx: Context, req: express.Request<any, any, RegisterPayload>, res: express.Response) => {
+  if (!req.body.username || (req.body.username && !(phoneValidation(req.body.username) || emailValidation(req.body.username)))) {
     responseError(new LogError(ErrorVars.E001_MISSING_DATA, 'LOGIC'), req, res);
     return;
   }

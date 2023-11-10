@@ -12,7 +12,7 @@ export const sPutRegisterRequest = async (username: string, requestId: string) =
     throw new LogError(ErrorVars.E028_REQUEST_ID_NOT_EXISTS, 'LOGIC');
   }
 
-  if (currentRequest.deletedAt || currentRequest.status in ['ASSIGN', 'DONE', 'PENDING']) {
+  if (currentRequest.deletedAt || ['ASSIGN', 'DONE', 'PENDING'].includes(currentRequest.status)) {
     throw new LogError(ErrorVars.E029_REQUEST_NOT_AVAILABLE, 'LOGIC');
   }
 
@@ -24,7 +24,7 @@ export const sPutRegisterRequest = async (username: string, requestId: string) =
     throw new LogError(ErrorVars.E031_LIMIT_SUBMIT_REQUEST, 'LOGIC');
   }
 
-  if (currentRequest?.requestQueue && username in currentRequest.requestQueue) {
+  if (currentRequest?.requestQueue && currentRequest?.requestQueue.includes(username)) {
     throw new LogError(ErrorVars.E032_DUPLICATE_SUBMIT_REQUEST, 'LOGIC');
   }
 

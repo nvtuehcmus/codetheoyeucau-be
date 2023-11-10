@@ -6,7 +6,7 @@ export const rUpdateRequestQueue = async (requestId: string, username: string, r
   const collection = instance.collection(COLLECTION.REQUESTS);
 
   await collection.updateOne(
-    { request_id: username },
+    { request_id: requestId },
     {
       $set: { request_queue: requestQueue }
     }

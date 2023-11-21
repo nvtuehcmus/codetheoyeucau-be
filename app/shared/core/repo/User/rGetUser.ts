@@ -25,6 +25,7 @@ export const rGetUserByUsername = async (username: string): Promise<USERS | null
     address: user.address,
     avatarUrl: user.avatar_url,
     isBlocked: user.is_blocked,
-    deletedAt: user.deleted_at
+    deletedAt: user.deleted_at,
+    tags: user.tags
   };
 };

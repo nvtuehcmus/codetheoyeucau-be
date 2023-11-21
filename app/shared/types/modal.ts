@@ -12,6 +12,7 @@ export type USERS = {
   address: string;
   deletedAt: Date | null;
   isBlocked: boolean;
+  tags: string[];
 };
 
 export type USER_PROFILE = {
@@ -24,6 +25,7 @@ export type USER_PROFILE = {
   email: string;
   avatarUrl: string;
   address: string;
+  tags: string[];
 };
 
 export type ITEM = {

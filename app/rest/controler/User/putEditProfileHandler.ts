@@ -7,7 +7,7 @@ import { JwtPayload } from 'jsonwebtoken';
 import { emailValidation } from 'shared/helpers/emailHelper';
 import { isValidDOB } from 'shared/core/services/helpers/dateValidation';
 import { sEditUserProfile } from 'shared/core/services/User/sEditUserProfile';
-import { getTokenPayload } from 'shared/helpers';
+import { getTokenPayload, isStringArray } from 'shared/helpers';
 
 export const putEditProfileHandler = async (
   ctx: Context,
@@ -21,11 +21,12 @@ export const putEditProfileHandler = async (
       dob: string;
       address: string;
       email: string;
+      tags?: string[];
     }
   >,
   res: express.Response
 ) => {
-  const { lastName, firstName, address, email, dob, gender } = req.body;
+  const { lastName, firstName, address, email, dob, gender, tags } = req.body;
   if (!req.headers.authorization) {
     responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
     return;
@@ -53,9 +54,13 @@ export const putEditProfileHandler = async (
     responseError(new LogError(ErrorVars.E016_FIELD_VALUE_INVALID, 'LOGIC'), req, res);
   }
 
+  if (tags && tags.length > 0 && !isStringArray(tags)) {
+    responseError(new LogError(ErrorVars.E016_FIELD_VALUE_INVALID, 'LOGIC', ['tags']), req, res);
+  }
+
   const payload = getTokenPayload(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
 
-  const user = await sEditUserProfile((payload as JwtPayload).username, lastName, firstName, gender, address, email, dob);
+  const user = await sEditUserProfile((payload as JwtPayload).username, lastName, firstName, gender, address, email, dob, tags);
 
   responseSuccess(req, res, {}, true);
 };

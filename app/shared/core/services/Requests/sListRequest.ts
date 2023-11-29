@@ -9,7 +9,6 @@ export const sListRequest = async (pageSize: number, id?: ObjectId, tags?: strin
     id: request.id,
     tags: request.tags,
     requestId: request.requestId,
-    address: request.address,
     deletedAt: request.deletedAt,
     fee: request.fee,
     feeType: request.feeType,

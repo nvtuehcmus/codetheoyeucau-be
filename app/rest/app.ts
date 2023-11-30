@@ -54,7 +54,7 @@ app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHa
 
 app.get('/v1/tags', context, asyncHandler(catchHandler(listTagsHandler)));
 app.get('/v1/requests', context, asyncHandler(catchHandler(listRequestHandler))); // test
-app.get('/v1/request/:request_id', context, asyncHandler(catchHandler(getRequestHandler))); // test
+app.get('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(getRequestHandler))); // test
 app.put('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(putRegisterRequestHandler))); // test
 app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler))); // test
 

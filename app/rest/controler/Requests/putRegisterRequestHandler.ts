@@ -13,7 +13,7 @@ export const putRegisterRequestHandler = async (ctx: Context, req: express.Reque
   }
   const payload = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
 
-  await sPutRegisterRequest(req.params.request_id ?? '', (payload as JwtPayload).username);
+  await sPutRegisterRequest((payload as JwtPayload).username, req.params.request_id ?? '');
 
   responseSuccess(req, res, {}, true);
 };

@@ -22,11 +22,12 @@ export const putEditProfileHandler = async (
       address: string;
       email: string;
       tags?: string[];
+      school:string
     }
   >,
   res: express.Response
 ) => {
-  const { lastName, firstName, address, email, dob, gender, tags } = req.body;
+  const { lastName, firstName, address, email, dob, gender, tags,school } = req.body;
   if (!req.headers.authorization) {
     responseError(new LogError(ErrorVars.E007_NOT_PERMISSION, 'AUTHORISATION'), req, res);
     return;
@@ -39,6 +40,9 @@ export const putEditProfileHandler = async (
     responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
   }
   if (address && address.length > 256) {
+    responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
+  }
+  if (school && school.length > 256) {
     responseError(new LogError(ErrorVars.E014_FIELD_LENGTH_INVALID, 'LOGIC'), req, res);
   }
   if (email && email.length > 256) {
@@ -60,7 +64,7 @@ export const putEditProfileHandler = async (
 
   const payload = getTokenPayload(req.headers.authorization.split(' ')[1], process.env.SECRET_TOKEN ?? '');
 
-  const user = await sEditUserProfile((payload as JwtPayload).username, lastName, firstName, gender, address, email, dob, tags);
+  await sEditUserProfile((payload as JwtPayload).username, lastName, firstName, gender, address, email, dob, tags, school);
 
   responseSuccess(req, res, {}, true);
 };

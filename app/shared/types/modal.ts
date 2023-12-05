@@ -13,6 +13,8 @@ export type USERS = {
   deletedAt: Date | null;
   isBlocked: boolean;
   tags: string[];
+  verified: boolean;
+  school: string;
 };
 
 export type USER_PROFILE = {
@@ -26,6 +28,8 @@ export type USER_PROFILE = {
   avatarUrl: string;
   address: string;
   tags: string[];
+  verified: boolean;
+  school: string;
 };
 
 export type ITEM = {

@@ -24,6 +24,9 @@ import { postCreateRequestHandler } from 'rest/controler/Requests/postCreateRequ
 import { getRequestHandler } from 'rest/controler/Requests/getRequestHandler';
 import { putRegisterRequestHandler } from 'rest/controler/Requests/putRegisterRequestHandler';
 import { postUserContactHandler } from 'rest/controler/User/postUserContactHandler';
+import { listRequestManagementHandler } from 'rest/controler/Requests/listRequestManagementHandler';
+import { listNotificationHandler } from 'rest/controler/Notification/listNotificationHandler';
+import { getNotificationHandler } from 'rest/controler/Notification/getNotificationHandler';
 
 const app = express();
 
@@ -58,17 +61,15 @@ app.get('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(getR
 app.put('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(putRegisterRequestHandler))); // test
 app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler))); // test
 
-app.get('/v1/manage/requests');
-app.get('/v1/notice');
+app.get('/v1/manage/requests', context, auth, asyncHandler(catchHandler(listRequestManagementHandler)));
+app.get('/v1/notices', context, auth, asyncHandler(catchHandler(listNotificationHandler)));
+app.get('/v1/notice/:id', context, auth, asyncHandler(catchHandler(getNotificationHandler)));
 
 app.post('/v1/customer-contact', context, asyncHandler(catchHandler(postUserContactHandler)));
 
 // ADMIN
-app.get('/v1/admin/company-info');
-app.put('/v1/admin/company-info');
 
 app.put('/v1/admin/block-user');
-
 app.put('/v1/admin/request/:request_id');
 app.put('/v1/admin/approve/:request_id');
 app.get('/v1/admin/assign');

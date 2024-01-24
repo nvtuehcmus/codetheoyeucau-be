@@ -108,3 +108,18 @@ export enum CUSTOMER_CONTACT_STATUS {
   PENDING = 'PENDING',
   SOLVED = 'SOLVED'
 }
+
+export enum REQUEST_STATE_STATUS {
+  'CANCEL' = 'CANCEL',
+  'ASSIGN' = 'ASSIGN',
+  'CREATED' = 'CREATED'
+}
+
+export type NOTIFICATION_RESPONSE = {
+  id: string;
+  title: string;
+  description: string;
+  read: boolean;
+  username: string | null;
+  createdAt: string;
+};

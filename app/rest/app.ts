@@ -56,8 +56,8 @@ app.put('/v1/profile-avatar', context, auth, singleImage, asyncHandler(catchHand
 app.put('/v1/profile', context, auth, asyncHandler(catchHandler(putEditProfileHandler)));
 
 app.get('/v1/tags', context, asyncHandler(catchHandler(listTagsHandler)));
-app.get('/v1/requests', context, asyncHandler(catchHandler(listRequestHandler))); // test
-app.get('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(getRequestHandler))); // test
+app.get('/v1/requests', context, asyncHandler(catchHandler(listRequestHandler)));
+app.get('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(getRequestHandler)));
 app.put('/v1/request/:request_id', context, auth, asyncHandler(catchHandler(putRegisterRequestHandler))); // test
 app.post('/v1/request', context, auth, asyncHandler(catchHandler(postCreateRequestHandler))); // test
 
